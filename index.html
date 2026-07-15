@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IMMO-COMS — Agence immobilière commerciale à Brazzaville</title>
+<meta name="description" content="IMMO-COMS, agence immobilière commerciale à Brazzaville : vente, location, gestion, financement et expertise de biens commerciaux au Congo. Note 4,3/5.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal-950:#0a2b28;
+    --teal-900:#0F2E2C;
+    --teal-800:#153e3b;
+    --gold-600:#B8894A;
+    --gold-500:#C9A24B;
+    --gold-300:#e3c988;
+    --cream:#FAF8F5;
+    --cream-2:#F2EEE6;
+    --ink:#1E1E1E;
+    --ink-soft:#4a4a46;
+    --line: rgba(30,30,30,0.12);
+    --line-gold: rgba(201,162,75,0.4);
+    --radius: 2px;
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Inter', -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family: var(--sans);
+    background: var(--cream);
+    color: var(--ink);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  h1,h2,h3,h4{font-family: var(--serif); font-weight:500; line-height:1.15; color: var(--teal-900);}
+  .container{ max-width:1240px; margin:0 auto; padding:0 32px;}
+  section{ position:relative; }
+  .eyebrow{
+    font-family: var(--sans);
+    font-size:0.72rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color: var(--gold-600);
+    font-weight:600;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:26px; height:1px; background:var(--gold-500);
+    display:inline-block;
+  }
+  .dossier-tag{
+    font-family: var(--sans);
+    font-size:0.68rem;
+    letter-spacing:0.14em;
+    color: var(--ink-soft);
+    text-transform:uppercase;
+    border:1px solid var(--line);
+    padding:3px 10px;
+    display:inline-block;
+    border-radius:20px;
+    opacity:0.75;
+  }
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding:14px 28px;
+    font-family:var(--sans);
+    font-weight:600;
+    font-size:0.88rem;
+    letter-spacing:0.02em;
+    border-radius:2px;
+    cursor:pointer;
+    transition: all .25s ease;
+    border:1px solid transparent;
+    white-space:nowrap;
+  }
+  .btn-gold{ background: var(--gold-500); color: var(--teal-950); }
+  .btn-gold:hover{ background: var(--gold-600); transform: translateY(-1px); }
+  .btn-outline{ border-color: rgba(250,248,245,0.4); color: var(--cream); }
+  .btn-outline:hover{ border-color: var(--cream); background: rgba(250,248,245,0.08); }
+  .btn-outline-dark{ border-color: var(--teal-900); color: var(--teal-900); }
+  .btn-outline-dark:hover{ background: var(--teal-900); color: var(--cream); }
+
+  /* reveal */
+  .reveal{ opacity:0; transform: translateY(22px); transition: opacity .8s ease, transform .8s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:200;
+    background: rgba(10,43,40,0.0);
+    transition: background .35s ease, box-shadow .35s ease, padding .35s ease;
+    padding:26px 0;
+  }
+  header.scrolled{
+    background: rgba(10,43,40,0.96);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    padding:14px 0;
+    backdrop-filter: blur(6px);
+  }
+  .nav-wrap{ display:flex; align-items:center; justify-content:space-between; }
+  .logo{ display:flex; flex-direction:column; line-height:1; }
+  .logo .mark{ font-family:var(--serif); font-size:1.4rem; letter-spacing:0.03em; color:var(--cream); }
+  .logo .mark b{ color: var(--gold-500); font-weight:500; }
+  .logo .sub{ font-size:0.58rem; letter-spacing:0.22em; color: rgba(250,248,245,0.55); text-transform:uppercase; margin-top:3px;}
+  nav.main-nav{ display:flex; align-items:center; gap:38px; }
+  nav.main-nav a{
+    color: rgba(250,248,245,0.85);
+    font-size:0.86rem;
+    font-weight:500;
+    position:relative;
+    padding:4px 0;
+  }
+  nav.main-nav a::after{
+    content:""; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--gold-500);
+    transition: width .25s ease;
+  }
+  nav.main-nav a:hover::after{ width:100%; }
+  .header-actions{ display:flex; align-items:center; gap:16px; }
+  .burger{ display:none; flex-direction:column; gap:5px; cursor:pointer; z-index:250; }
+  .burger span{ width:24px; height:2px; background:var(--cream); display:block; }
+
+  /* ---------- WHATSAPP FLOAT ---------- */
+  .wa-float{
+    position:fixed; right:22px; bottom:22px; z-index:300;
+    width:58px; height:58px; border-radius:50%;
+    background:#0F2E2C; border:1px solid var(--gold-500);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    transition: transform .25s ease;
+  }
+  .wa-float:hover{ transform: scale(1.08); }
+  .wa-float svg{ width:26px; height:26px; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100vh;
+    display:flex; align-items:center;
+    background:
+      linear-gradient(120deg, rgba(10,43,40,0.93) 0%, rgba(10,43,40,0.82) 45%, rgba(21,62,59,0.55) 100%),
+      var(--hero-art);
+    background-size:cover; background-position:center;
+    position:relative;
+    padding-top:120px; padding-bottom:80px;
+  }
+  .hero::after{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background: radial-gradient(ellipse at 75% 30%, rgba(201,162,75,0.14), transparent 55%);
+  }
+  .hero-grid{ display:grid; grid-template-columns: 1.15fr 0.85fr; gap:60px; align-items:center; position:relative; z-index:2;}
+  .hero-tag{ color: var(--gold-300); }
+  .hero h1{
+    color: var(--cream);
+    font-size: clamp(2.4rem, 5vw, 3.7rem);
+    margin: 22px 0 24px;
+    max-width: 15ch;
+  }
+  .hero h1 em{ font-style:italic; color: var(--gold-500); }
+  .hero p.lead{
+    color: rgba(250,248,245,0.82);
+    font-size:1.08rem;
+    max-width: 46ch;
+    margin-bottom:36px;
+  }
+  .hero-ctas{ display:flex; gap:16px; flex-wrap:wrap; margin-bottom:56px; }
+  .hero-meta{ display:flex; gap:34px; flex-wrap:wrap; }
+  .hero-meta div{ border-left:1px solid var(--line-gold); padding-left:14px; }
+  .hero-meta .num{ font-family:var(--serif); color:var(--gold-500); font-size:1.5rem; display:block; }
+  .hero-meta .lbl{ font-size:0.72rem; color:rgba(250,248,245,0.6); text-transform:uppercase; letter-spacing:0.08em; }
+
+  /* Hero visual: layered dossier card evoking the interior described in brief */
+  .hero-visual{ position:relative; }
+  .property-card{
+    background: linear-gradient(160deg, #caa15a 0%, #a9793c 38%, #7c5426 100%);
+    border-radius: 3px;
+    aspect-ratio: 4/5;
+    position:relative;
+    overflow:hidden;
+    box-shadow: 0 40px 70px rgba(0,0,0,0.45);
+  }
+  .property-card .marble{
+    position:absolute; inset:0;
+    background:
+      repeating-linear-gradient(115deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 40px),
+      linear-gradient(200deg, #efe6d3 0%, #e8dcc0 40%, #cbb385 100%);
+    height:38%; bottom:0; top:auto;
+  }
+  .property-card .leather{
+    position:absolute; left:10%; right:10%; bottom:16%; height:34%;
+    background: linear-gradient(160deg, #241a12, #14100b);
+    border-radius:6px 6px 2px 2px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(201,162,75,0.15);
+  }
+  .property-card .leather::before{
+    content:""; position:absolute; top:0; left:0; right:0; height:40%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.06), transparent);
+  }
+  .property-card .wall{
+    position:absolute; top:0; left:0; right:0; height:62%;
+    background: linear-gradient(180deg, #c98f3f 0%, #b57a35 60%, #9c6829 100%);
+  }
+  .property-card .frame-caption{
+    position:absolute; bottom:18px; left:18px; right:18px;
+    color: var(--cream); font-size:0.7rem; letter-spacing:0.06em;
+    display:flex; justify-content:space-between; align-items:center;
+    z-index:3;
+  }
+  .property-card .frame-caption span:first-child{ font-family:var(--serif); font-style:italic; font-size:0.95rem;}
+  .card-tag-top{
+    position:absolute; top:18px; left:18px; z-index:3;
+    background:rgba(10,43,40,0.85); color:var(--gold-300);
+    font-size:0.65rem; letter-spacing:0.1em; text-transform:uppercase;
+    padding:6px 12px; border-radius:20px; border:1px solid rgba(201,162,75,0.4);
+  }
+  .float-note{
+    position:absolute; bottom:-26px; left:-26px;
+    background: var(--cream); padding:18px 22px; box-shadow:0 20px 40px rgba(0,0,0,0.18);
+    max-width:230px; border-left:3px solid var(--gold-500);
+  }
+  .float-note .stars{ color:var(--gold-500); font-size:0.85rem; margin-bottom:6px; letter-spacing:2px;}
+  .float-note p{ font-size:0.82rem; color: var(--ink-soft); }
+
+  /* ---------- TRUST BAR ---------- */
+  .trust-bar{
+    background: var(--teal-900);
+    border-top:1px solid rgba(201,162,75,0.25);
+    padding:26px 0;
+  }
+  .trust-grid{
+    display:grid; grid-template-columns: repeat(5,1fr);
+    gap:20px;
+  }
+  .trust-item{ display:flex; align-items:center; gap:12px; color:rgba(250,248,245,0.9); }
+  .trust-item svg{ width:26px; height:26px; flex-shrink:0; color:var(--gold-500); }
+  .trust-item .t-title{ font-size:0.82rem; font-weight:600; }
+  .trust-item .t-sub{ font-size:0.72rem; color:rgba(250,248,245,0.55); }
+
+  /* ---------- SECTION HEADERS ---------- */
+  .sec-head{ max-width:640px; margin-bottom:56px; }
+  .sec-head h2{ font-size: clamp(1.9rem, 3.4vw, 2.6rem); margin-top:16px; }
+  .sec-head p{ color: var(--ink-soft); margin-top:18px; font-size:1.02rem; }
+  .sec-pad{ padding:110px 0; }
+  .sec-num{ font-family:var(--serif); font-style:italic; color: var(--line); font-size:5rem; position:absolute; top:20px; right:32px; line-height:1; z-index:0; user-select:none; }
+
+  /* ---------- SERVICES ---------- */
+  .services-wrap{ background: var(--cream-2); }
+  .services-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:1px; background: var(--line); border:1px solid var(--line); }
+  .service-card{
+    background: var(--cream); padding:38px 34px; position:relative;
+    transition: background .3s ease;
+  }
+  .service-card:hover{ background:#fff; }
+  .service-card .s-icon{ width:38px; height:38px; color:var(--teal-900); margin-bottom:22px; }
+  .service-card h3{ font-size:1.15rem; margin-bottom:10px; }
+  .service-card p{ font-size:0.9rem; color: var(--ink-soft); }
+  .service-card .s-list{ margin-top:14px; font-size:0.78rem; color:var(--gold-600); font-weight:600; letter-spacing:0.02em; }
+
+  /* ---------- PORTFOLIO ---------- */
+  .filters{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:44px; }
+  .filter-btn{
+    padding:9px 18px; font-size:0.8rem; font-weight:600; border:1px solid var(--line);
+    border-radius:30px; cursor:pointer; background:transparent; color:var(--ink-soft);
+    transition: all .2s ease;
+  }
+  .filter-btn.active, .filter-btn:hover{ background:var(--teal-900); color:var(--cream); border-color:var(--teal-900); }
+  .portfolio-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap:28px; }
+  .p-card{ background:#fff; overflow:hidden; box-shadow:0 10px 30px rgba(15,46,44,0.06); border:1px solid var(--line); transition: transform .35s ease, box-shadow .35s ease; }
+  .p-card:hover{ transform: translateY(-6px); box-shadow:0 24px 40px rgba(15,46,44,0.14); }
+  .p-visual{ aspect-ratio:4/3; position:relative; overflow:hidden; }
+  .p-visual .tone{ position:absolute; inset:0; transition: transform .5s ease; }
+  .p-card:hover .p-visual .tone{ transform: scale(1.06); }
+  .p-tag{ position:absolute; top:14px; left:14px; background:rgba(10,43,40,0.85); color:var(--gold-300); font-size:0.65rem; letter-spacing:0.08em; text-transform:uppercase; padding:5px 12px; border-radius:20px; }
+  .p-body{ padding:22px 24px 26px; }
+  .p-body .p-loc{ font-size:0.72rem; color:var(--gold-600); text-transform:uppercase; letter-spacing:0.06em; font-weight:600; margin-bottom:6px; }
+  .p-body h4{ font-size:1.1rem; margin-bottom:8px; }
+  .p-body p{ font-size:0.86rem; color:var(--ink-soft); }
+  .p-foot{ margin-top:16px; display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--line); padding-top:14px; font-size:0.8rem; }
+  .p-foot span:first-child{ color:var(--ink-soft); }
+  .p-foot span:last-child{ color:var(--teal-900); font-weight:600; }
+
+  .tone-office{ background: linear-gradient(150deg,#1b3c39,#0a2b28); }
+  .tone-office::before{ content:""; position:absolute; inset:14%; border:1px solid rgba(201,162,75,0.35); }
+  .tone-building{ background: linear-gradient(160deg,#c9a24b,#8a6127); }
+  .tone-land{ background: repeating-linear-gradient(45deg, #e8dcc0, #e8dcc0 12px, #d8c69f 12px, #d8c69f 24px); }
+  .tone-new{ background: linear-gradient(150deg,#241a12,#0a2b28); }
+
+  /* ---------- WHY US ---------- */
+  .why-wrap{ background: var(--teal-900); color: var(--cream); }
+  .why-wrap .eyebrow::before{ background:var(--gold-500);}
+  .why-wrap h2{ color: var(--cream); }
+  .why-grid{ display:grid; grid-template-columns: repeat(4, 1fr); gap:1px; margin-top:20px; background: rgba(250,248,245,0.1);}
+  .why-card{ background: var(--teal-950); padding:34px 28px; }
+  .why-card svg{ width:30px; height:30px; color: var(--gold-500); margin-bottom:18px; }
+  .why-card h4{ color:var(--cream); font-size:1.02rem; margin-bottom:8px; }
+  .why-card p{ font-size:0.85rem; color: rgba(250,248,245,0.65); }
+
+  /* ---------- REVIEWS ---------- */
+  .reviews-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:30px; }
+  .review-card{ background:#fff; padding:40px; border-left:3px solid var(--gold-500); box-shadow:0 10px 30px rgba(15,46,44,0.06);}
+  .review-card .stars{ color:var(--gold-500); letter-spacing:3px; margin-bottom:20px; font-size:1rem;}
+  .review-card p.quote{ font-family:var(--serif); font-style:italic; font-size:1.15rem; color:var(--teal-900); margin-bottom:24px; }
+  .review-card .who{ display:flex; align-items:center; gap:14px; }
+  .avatar{ width:44px; height:44px; border-radius:50%; background:var(--teal-900); color:var(--gold-500); display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-size:1.1rem; }
+  .who .name{ font-weight:600; font-size:0.92rem; }
+  .who .meta{ font-size:0.76rem; color:var(--ink-soft); }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{ display:grid; grid-template-columns: 0.9fr 1.1fr; gap:70px; align-items:center; }
+  .about-visual{ position:relative; aspect-ratio:3/4; background: linear-gradient(165deg,#c9a24b,#0a2b28 65%); }
+  .about-visual::before{ content:""; position:absolute; inset:24px; border:1px solid rgba(250,248,245,0.4); }
+  .about-visual .quote-block{ position:absolute; bottom:32px; left:32px; right:32px; color:#fff; }
+  .about-visual .quote-block .qmark{ font-family:var(--serif); font-size:3rem; color:var(--gold-500); line-height:0.5; }
+  .about-text p{ color: var(--ink-soft); margin-bottom:18px; font-size:1.02rem; }
+  .about-stats{ display:flex; gap:40px; margin-top:32px; padding-top:32px; border-top:1px solid var(--line); }
+  .about-stats div span{ display:block; }
+  .about-stats .num{ font-family:var(--serif); font-size:1.8rem; color:var(--teal-900); }
+  .about-stats .lbl{ font-size:0.76rem; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.06em; margin-top:4px; }
+
+  /* ---------- CONTACT ---------- */
+  .contact-wrap{ background: var(--cream-2); }
+  .contact-grid{ display:grid; grid-template-columns: 0.9fr 1.1fr; gap:60px; }
+  .contact-info-card{ background:var(--teal-900); color:var(--cream); padding:44px; }
+  .contact-info-card h3{ color:var(--cream); font-size:1.3rem; margin-bottom:24px; }
+  .c-row{ display:flex; gap:16px; margin-bottom:22px; align-items:flex-start; }
+  .c-row svg{ width:20px; height:20px; color:var(--gold-500); flex-shrink:0; margin-top:2px; }
+  .c-row .c-label{ font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:rgba(250,248,245,0.55); margin-bottom:3px; }
+  .c-row a, .c-row span.val{ font-size:0.95rem; }
+  .map-embed{ margin-top:28px; border:1px solid rgba(201,162,75,0.3); overflow:hidden; }
+  .map-embed iframe{ width:100%; height:210px; border:0; filter: grayscale(0.15) contrast(1.05); display:block; }
+
+  form.rdv-form{ background:#fff; padding:44px; box-shadow:0 10px 40px rgba(15,46,44,0.08); }
+  .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:18px; }
+  .field{ display:flex; flex-direction:column; gap:6px; }
+  .field.full{ grid-column: 1 / -1; }
+  .field label{ font-size:0.76rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-soft); font-weight:600; }
+  .field input, .field select, .field textarea{
+    border:1px solid var(--line); padding:12px 14px; font-family:var(--sans); font-size:0.92rem;
+    background: var(--cream); border-radius:2px; color:var(--ink);
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{ outline:2px solid var(--gold-500); outline-offset:1px; border-color:var(--gold-500); }
+  .field textarea{ resize:vertical; min-height:100px; }
+  .form-note{ font-size:0.78rem; color:var(--ink-soft); margin-top:14px; }
+  .form-success{ display:none; background:#eef6ef; border-left:3px solid #3c8a4a; padding:14px 18px; font-size:0.88rem; margin-top:16px; color:#245a30; }
+  .form-error{ font-size:0.74rem; color:#a33; margin-top:4px; min-height:14px; }
+
+  /* ---------- FOOTER ---------- */
+  footer{ background: var(--teal-950); color: rgba(250,248,245,0.7); padding:70px 0 30px; }
+  .footer-grid{ display:grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap:50px; margin-bottom:50px; }
+  .footer-col h5{ color:var(--cream); font-size:0.82rem; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:18px; }
+  .footer-col ul li{ margin-bottom:10px; font-size:0.86rem; }
+  .footer-col ul li a:hover{ color: var(--gold-500); }
+  .footer-brand .mark{ font-family:var(--serif); font-size:1.5rem; color:var(--cream); }
+  .footer-brand .mark b{ color:var(--gold-500); font-weight:500; }
+  .footer-brand p{ font-size:0.85rem; margin-top:14px; max-width:34ch; }
+  .socials{ display:flex; gap:12px; margin-top:20px; }
+  .socials a{ width:36px; height:36px; border:1px solid rgba(250,248,245,0.25); border-radius:50%; display:flex; align-items:center; justify-content:center; }
+  .socials a:hover{ border-color:var(--gold-500); }
+  .socials svg{ width:16px; height:16px; }
+  .footer-bottom{ border-top:1px solid rgba(250,248,245,0.12); padding-top:26px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-size:0.76rem; }
+
+  /* ---------- SKIP / FOCUS ---------- */
+  a.skip-link{ position:absolute; left:-999px; top:0; background:var(--gold-500); color:var(--teal-950); padding:12px 18px; z-index:999; }
+  a.skip-link:focus{ left:12px; top:12px; }
+  :focus-visible{ outline:2px solid var(--gold-500); outline-offset:2px; }
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ transition:none; opacity:1; transform:none; }
+    html{ scroll-behavior:auto; }
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 1000px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero-visual{ max-width:380px; margin:0 auto; }
+    .trust-grid{ grid-template-columns: repeat(2,1fr); row-gap:24px; }
+    .services-grid{ grid-template-columns: repeat(2,1fr); }
+    .portfolio-grid{ grid-template-columns: repeat(2,1fr); }
+    .why-grid{ grid-template-columns: repeat(2,1fr); }
+    .reviews-grid{ grid-template-columns:1fr; }
+    .about-grid{ grid-template-columns:1fr; gap:40px; }
+    .contact-grid{ grid-template-columns:1fr; }
+    .footer-grid{ grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 720px){
+    nav.main-nav{
+      position:fixed; top:0; right:0; height:100vh; width:78%; max-width:340px;
+      background: var(--teal-950); flex-direction:column; align-items:flex-start;
+      padding:100px 32px 40px; gap:26px;
+      transform: translateX(100%); transition: transform .35s ease;
+    }
+    nav.main-nav.open{ transform: translateX(0); }
+    .burger{ display:flex; }
+    .header-actions .btn-gold{ display:none; }
+    .services-grid, .portfolio-grid, .why-grid, .footer-grid{ grid-template-columns: 1fr; }
+    .trust-grid{ grid-template-columns:1fr 1fr; }
+    .form-row{ grid-template-columns:1fr; }
+    .sec-pad{ padding:70px 0; }
+    .float-note{ position:static; margin-top:20px; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Aller au contenu principal</a>
+
+<!-- ============ HEADER ============ -->
+<header id="site-header">
+  <div class="container nav-wrap">
+    <a href="#top" class="logo" aria-label="IMMO-COMS, accueil">
+      <span class="mark">IMMO<b>-</b>COMS</span>
+      <span class="sub">Real Estate · Brazzaville</span>
+    </a>
+    <nav class="main-nav" id="main-nav">
+      <a href="#accueil">Accueil</a>
+      <a href="#services">Services</a>
+      <a href="#biens">Biens</a>
+      <a href="#apropos">À propos</a>
+      <a href="#avis">Avis</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a href="#contact" class="btn btn-gold">Prendre rendez-vous</a>
+      <button class="burger" id="burger-btn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- WhatsApp float -->
+<a class="wa-float" href="https://wa.me/24268369325" target="_blank" rel="noopener" aria-label="Contacter IMMO-COMS sur WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#C9A24B"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.33 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2Zm5.8 14.06c-.24.68-1.4 1.32-1.93 1.4-.49.08-1.11.11-1.79-.11-.41-.13-.94-.31-1.62-.6-2.85-1.23-4.7-4.1-4.84-4.29-.14-.19-1.16-1.54-1.16-2.94 0-1.4.73-2.09 1-2.38.26-.28.57-.35.76-.35.19 0 .38 0 .55.01.18.01.42-.07.65.5.24.58.82 2 .89 2.14.07.14.11.31.02.5-.09.19-.14.31-.28.48-.14.16-.29.36-.41.49-.14.14-.28.29-.12.57.16.28.71 1.17 1.52 1.9 1.04.94 1.92 1.23 2.2 1.37.28.14.44.12.6-.07.16-.19.68-.79.86-1.06.18-.28.36-.23.6-.14.24.09 1.53.72 1.79.85.26.14.44.2.5.31.07.12.07.66-.17 1.33Z"/></svg>
+</a>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="accueil" style="--hero-art:none;">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow hero-tag">Agence immobilière commerciale · Brazzaville, Congo</span>
+        <h1>L'excellence <em>immobilière commerciale</em> en Afrique centrale</h1>
+        <p class="lead">IMMO-COMS accompagne investisseurs, entreprises et propriétaires dans la vente, la location, la gestion et le financement de biens commerciaux à Brazzaville — avec la rigueur d'un cabinet d'affaires et l'ancrage d'une équipe locale reconnue.</p>
+        <div class="hero-ctas">
+          <a href="#biens" class="btn btn-gold">Voir nos biens</a>
+          <a href="#contact" class="btn btn-outline">Nous contacter</a>
+        </div>
+        <div class="hero-meta">
+          <div>
+            <span class="num">4.3★</span>
+            <span class="lbl">Note clients Google</span>
+          </div>
+          <div>
+            <span class="num">12</span>
+            <span class="lbl">Domaines d'expertise</span>
+          </div>
+          <div>
+            <span class="num">100%</span>
+            <span class="lbl">Accessible PMR</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual reveal">
+        <div class="property-card">
+          <div class="card-tag-top">Portfolio — Brazzaville</div>
+          <div class="wall"></div>
+          <div class="marble"></div>
+          <div class="leather"></div>
+          <div class="frame-caption">
+            <span>Dossier commercial</span>
+            <span>N°01</span>
+          </div>
+        </div>
+        <div class="float-note">
+          <div class="stars">★★★★★</div>
+          <p>« Un accompagnement sérieux, à l'écoute de nos besoins. » — Aïcha D.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRUST BAR ============ -->
+  <div class="trust-bar">
+    <div class="container trust-grid">
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        <div><div class="t-title">4,3 / 5</div><div class="t-sub">Avis clients Google</div></div>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7-4.5-7-11a7 7 0 0 1 14 0c0 6.5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        <div><div class="t-title">Brazzaville</div><div class="t-sub">99 Rue Mayama</div></div>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="13" rx="1"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+        <div><div class="t-title">Parking gratuit</div><div class="t-sub">Couvert &amp; extérieur, sur site</div></div>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg>
+        <div><div class="t-title">Accessible PMR</div><div class="t-sub">Boucle magnétique, sanitaires adaptés</div></div>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3v18M5 8l7-5 7 5M5 16l7 5 7-5"/></svg>
+        <div><div class="t-title">Espace inclusif</div><div class="t-sub">LGBTQ+ friendly</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SERVICES ============ -->
+  <section class="services-wrap sec-pad" id="services">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="dossier-tag">Dossier 01</span>
+        <span class="eyebrow" style="margin-top:14px;">Nos domaines d'expertise</span>
+        <h2>Un accompagnement complet, du terrain au financement</h2>
+        <p>Douze services, structurés en six pôles d'expertise, pour couvrir chaque étape d'un projet immobilier commercial à Brazzaville.</p>
+      </div>
+    </div>
+    <div class="container">
+      <div class="services-grid reveal">
+
+        <div class="service-card">
+          <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/></svg>
+          <h3>Vente &amp; location</h3>
+          <p>Constructions neuves et biens existants, pour propriétaires comme pour locataires professionnels.</p>
+          <div class="s-list">Ventes et locations de constructions neuves</div>
+        </div>
+
+        <div class="service-card">
+          <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 21h16M6 21V10M18 21V10M4 10l8-6 8 6M9 14h.01M15 14h.01"/></svg>
+          <h3>Enchères immobilières</h3>
+          <p>Organisation et accompagnement lors de ventes aux enchères de biens commerciaux.</p>
+          <div class="s-list">Property auctions</div>
+        </div>
+
+        <div class="service-card">
+          <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M9 3h6l2 4-5 12L7 7l2-4Z"/><path d="M7 7h10"/></svg>
+          <h3>Expertises &amp; évaluations</h3>
+          <p>Estimation rigoureuse de la valeur de vos actifs commerciaux, terrains et immeubles.</p>
+          <div class="s-list">Appraisals</div>
+        </div>
+
+        <div class="service-card">
+          <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 10h18M6 10V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v4M4 10v10h16V10"/></svg>
+          <h3>Financement commercial</h3>
+          <p>Structuration et mise en relation pour le financement de vos opérations immobilières.</p>
+          <div class="s-list">Commercial property financing</div>
+        </div>
+
+        <div class="service-card">
+          <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 3v18h18M8 17V9m5 8V5m5 12v-6"/></svg>
+          <h3>Gestion de projets &amp; de biens</h3>
+          <p>Suivi de projets de construction et gestion locative complète pour propriétaires exigeants.</p>
+          <div class="s-list">Project &amp; property management</div>
+        </div>
+
+        <div class="service-card">
+          <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 21V8l8-5 8 5v13M9 21v-7h6v7"/><path d="M13 3l7 4"/></svg>
+          <h3>Bureaux, immeubles &amp; terrains</h3>
+          <p>Location de bureaux, d'immeubles commerciaux et vente/location de terrains, en ville comme en périphérie.</p>
+          <div class="s-list">Office, buildings &amp; land</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PORTFOLIO ============ -->
+  <section class="sec-pad" id="biens" style="position:relative;">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="dossier-tag">Dossier 02</span>
+        <span class="eyebrow" style="margin-top:14px;">Portfolio</span>
+        <h2>Une sélection de biens commerciaux</h2>
+        <p>Exemples représentatifs de notre portefeuille — visuels d'illustration, biens à consulter sur demande auprès de notre équipe.</p>
+      </div>
+
+      <div class="filters reveal" role="tablist" aria-label="Filtrer les biens">
+        <button class="filter-btn active" data-filter="all">Tous les biens</button>
+        <button class="filter-btn" data-filter="bureaux">Bureaux</button>
+        <button class="filter-btn" data-filter="immeubles">Immeubles commerciaux</button>
+        <button class="filter-btn" data-filter="terrains">Terrains</button>
+        <button class="filter-btn" data-filter="neuf">Neuf</button>
+      </div>
+
+      <div class="portfolio-grid reveal" id="portfolio-grid">
+
+        <article class="p-card" data-cat="bureaux">
+          <div class="p-visual"><div class="tone tone-office"></div><span class="p-tag">Bureaux</span></div>
+          <div class="p-body">
+            <div class="p-loc">Brazzaville Centre</div>
+            <h4>Bureau moderne — Centre-ville</h4>
+            <p>Plateau de bureaux aménageable, idéal siège social ou représentation commerciale.</p>
+            <div class="p-foot"><span>Location</span><span>Nous consulter</span></div>
+          </div>
+        </article>
+
+        <article class="p-card" data-cat="immeubles">
+          <div class="p-visual"><div class="tone tone-building"></div><span class="p-tag">Immeuble</span></div>
+          <div class="p-body">
+            <div class="p-loc">Poto-Poto</div>
+            <h4>Immeuble commercial — Poto-Poto</h4>
+            <p>Immeuble à usage mixte, rez-de-chaussée commercial et étages en location.</p>
+            <div class="p-foot"><span>Vente / Location</span><span>Nous consulter</span></div>
+          </div>
+        </article>
+
+        <article class="p-card" data-cat="terrains">
+          <div class="p-visual"><div class="tone tone-land"></div><span class="p-tag">Terrain</span></div>
+          <div class="p-body">
+            <div class="p-loc">Périphérie Brazzaville</div>
+            <h4>Terrain commercial — Périphérie</h4>
+            <p>Parcelle viabilisable, adaptée à un projet d'entrepôt ou de plateforme logistique.</p>
+            <div class="p-foot"><span>Vente / Location</span><span>Nous consulter</span></div>
+          </div>
+        </article>
+
+        <article class="p-card" data-cat="neuf">
+          <div class="p-visual"><div class="tone tone-new"></div><span class="p-tag">Neuf</span></div>
+          <div class="p-body">
+            <div class="p-loc">Bacongo</div>
+            <h4>Programme neuf — Bacongo</h4>
+            <p>Construction neuve à usage commercial, livraison suivie par notre pôle gestion de projets.</p>
+            <div class="p-foot"><span>Vente</span><span>Nous consulter</span></div>
+          </div>
+        </article>
+
+        <article class="p-card" data-cat="bureaux">
+          <div class="p-visual"><div class="tone tone-office"></div><span class="p-tag">Bureaux</span></div>
+          <div class="p-body">
+            <div class="p-loc">Plateau des 15 ans</div>
+            <h4>Espace de bureaux — Plateau des 15 ans</h4>
+            <p>Bureaux cloisonnés avec espace de réception, parking sur site inclus.</p>
+            <div class="p-foot"><span>Location</span><span>Nous consulter</span></div>
+          </div>
+        </article>
+
+        <article class="p-card" data-cat="immeubles">
+          <div class="p-visual"><div class="tone tone-building"></div><span class="p-tag">Immeuble</span></div>
+          <div class="p-body">
+            <div class="p-loc">Moungali</div>
+            <h4>Immeuble de standing — Moungali</h4>
+            <p>Immeuble commercial entièrement rénové, adapté marketing immobilier &amp; showroom.</p>
+            <div class="p-foot"><span>Vente</span><span>Nous consulter</span></div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHY US ============ -->
+  <section class="why-wrap sec-pad">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="dossier-tag" style="border-color:rgba(250,248,245,0.3); color:rgba(250,248,245,0.6);">Dossier 03</span>
+        <span class="eyebrow" style="margin-top:14px;">Pourquoi choisir IMMO-COMS</span>
+        <h2>Une agence exigeante, accessible à tous</h2>
+      </div>
+      <div class="why-grid reveal">
+        <div class="why-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg>
+          <h4>Accessibilité PMR</h4>
+          <p>Boucle magnétique, accès et sanitaires adaptés aux personnes à mobilité réduite.</p>
+        </div>
+        <div class="why-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3v18M5 8l7-5 7 5M5 16l7 5 7-5"/></svg>
+          <h4>Espace inclusif</h4>
+          <p>Environnement LGBTQ+ friendly et espace sûr pour les personnes transgenres.</p>
+        </div>
+        <div class="why-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="7" width="18" height="13" rx="1"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+          <h4>Parking gratuit</h4>
+          <p>Parking couvert multi-étages, extérieur et sur site pour tous nos rendez-vous.</p>
+        </div>
+        <div class="why-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 10h18M6 10V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v4M4 10v10h16V10"/></svg>
+          <h4>Sur rendez-vous</h4>
+          <p>Rendez-vous en ligne ou sur site, pour un accompagnement personnalisé et sans attente.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REVIEWS ============ -->
+  <section class="sec-pad" id="avis">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="dossier-tag">Dossier 04</span>
+        <span class="eyebrow" style="margin-top:14px;">Ce que disent nos clients</span>
+        <h2>Une note de 4,3/5 auprès de nos clients</h2>
+      </div>
+      <div class="reviews-grid reveal">
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">« Une équipe à l'écoute, qui a su répondre précisément à nos besoins de location commerciale. »</p>
+          <div class="who">
+            <div class="avatar">A</div>
+            <div><div class="name">Aïcha Diallo</div><div class="meta">Avis Google · Client vérifié</div></div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="stars" style="letter-spacing:2px;">★★★☆☆</div>
+          <p class="quote">« Un service globalement satisfaisant, avec une équipe disponible pour accompagner notre projet. »</p>
+          <div class="who">
+            <div class="avatar">F</div>
+            <div><div class="name">Fils Habumuremyi</div><div class="meta">Avis Google · Client vérifié</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="sec-pad" id="apropos" style="background:var(--cream-2);">
+    <div class="container about-grid">
+      <div class="about-visual reveal">
+        <div class="quote-block">
+          <span class="qmark">"</span>
+          <p style="font-family:var(--serif); font-style:italic; font-size:1.05rem;">Une expertise locale, une vision panafricaine.</p>
+        </div>
+      </div>
+      <div class="about-text reveal">
+        <span class="dossier-tag">Dossier 05</span>
+        <span class="eyebrow" style="margin-top:14px;">À propos d'IMMO-COMS</span>
+        <h2 style="margin:16px 0 22px;">Ancrés à Brazzaville, tournés vers l'Afrique centrale</h2>
+        <p>Basée au 99 Rue Mayama, à Brazzaville, IMMO-COMS est une agence immobilière commerciale reconnue localement pour la qualité de son accompagnement, de la vente et la location de biens neufs à la gestion de projets complexes.</p>
+        <p>Notre équipe réunit expertise du terrain congolais et méthodes rigoureuses de gestion, de financement et d'évaluation immobilière — au service d'investisseurs, d'entreprises et de propriétaires souhaitant valoriser leurs actifs commerciaux.</p>
+        <p>Une note de 4,3/5 auprès de nos clients traduit notre engagement quotidien pour un service accessible, inclusif et sur mesure.</p>
+        <div class="about-stats">
+          <div><span class="num">12</span><span class="lbl">Services</span></div>
+          <div><span class="num">4.3★</span><span class="lbl">Note clients</span></div>
+          <div><span class="num">1</span><span class="lbl">Adresse à Brazzaville</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="contact-wrap sec-pad" id="contact">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="dossier-tag">Dossier 06</span>
+        <span class="eyebrow" style="margin-top:14px;">Contact</span>
+        <h2>Parlons de votre projet immobilier</h2>
+        <p>Horaires indicatifs — Lun–Ven 08h00–18h00, Sam 08h00–13h00. Nous consulter pour confirmation.</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="reveal">
+          <div class="contact-info-card">
+            <h3>Coordonnées</h3>
+            <div class="c-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7-4.5-7-11a7 7 0 0 1 14 0c0 6.5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              <div><div class="c-label">Adresse</div><span class="val">99 Rue Mayama, Brazzaville, Congo-Brazzaville</span></div>
+            </div>
+            <div class="c-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.11 4.18 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.79.63 2.65a2 2 0 0 1-.45 2.11L8.09 9.63a16 16 0 0 0 6 6l1.15-1.15a2 2 0 0 1 2.11-.45c.86.3 1.75.51 2.65.63A2 2 0 0 1 22 16.92Z"/></svg>
+              <div><div class="c-label">Téléphone</div><a class="val" href="tel:+242068369325">+242 06 836 9325</a></div>
+            </div>
+            <div class="c-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.33 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2Z"/></svg>
+              <div><div class="c-label">WhatsApp</div><a class="val" href="https://wa.me/24268369325" target="_blank" rel="noopener">Écrire sur WhatsApp</a></div>
+            </div>
+            <div class="c-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+              <div><div class="c-label">Horaires</div><span class="val">Lun–Ven 08h–18h · Sam 08h–13h (nous consulter)</span></div>
+            </div>
+            <div class="c-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h18v18H3zM3 9h18M9 21V9"/></svg>
+              <div><div class="c-label">Site web</div><a class="val" href="https://immo-coms.com" target="_blank" rel="noopener">immo-coms.com</a></div>
+            </div>
+            <div class="map-embed">
+              <iframe src="https://maps.google.com/maps?q=99%20Rue%20Mayama%2C%20Brazzaville%2C%20Congo&t=&z=15&ie=UTF8&iwloc=&output=embed" title="Localisation IMMO-COMS sur Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <form class="rdv-form" id="rdv-form" novalidate>
+            <h3 style="margin-bottom:22px;">Demande de rendez-vous</h3>
+            <div class="form-row">
+              <div class="field">
+                <label for="f-nom">Nom complet</label>
+                <input type="text" id="f-nom" name="nom" required autocomplete="name">
+                <div class="form-error" id="err-nom"></div>
+              </div>
+              <div class="field">
+                <label for="f-tel">Téléphone</label>
+                <input type="tel" id="f-tel" name="telephone" required autocomplete="tel">
+                <div class="form-error" id="err-tel"></div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field">
+                <label for="f-email">E-mail</label>
+                <input type="email" id="f-email" name="email" required autocomplete="email">
+                <div class="form-error" id="err-email"></div>
+              </div>
+              <div class="field">
+                <label for="f-service">Service concerné</label>
+                <select id="f-service" name="service" required>
+                  <option value="">Sélectionner…</option>
+                  <option>Vente / location de biens neufs</option>
+                  <option>Enchères immobilières</option>
+                  <option>Expertises et évaluations</option>
+                  <option>Financement commercial</option>
+                  <option>Gestion de projets</option>
+                  <option>Gestion locative</option>
+                  <option>Location de bureaux</option>
+                  <option>Location d'immeubles commerciaux</option>
+                  <option>Terrains (achat / location)</option>
+                  <option>Marketing immobilier commercial</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field full">
+                <label for="f-message">Votre message</label>
+                <textarea id="f-message" name="message" required placeholder="Décrivez votre projet ou votre besoin…"></textarea>
+                <div class="form-error" id="err-message"></div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-gold" style="width:100%;">Envoyer ma demande</button>
+            <p class="form-note">En soumettant ce formulaire, vous acceptez d'être contacté par IMMO-COMS au sujet de votre demande.</p>
+            <div class="form-success" id="form-success" role="status">Votre demande a bien été envoyée. Notre équipe vous recontactera sous peu.</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <span class="mark">IMMO<b>-</b>COMS</span>
+        <p>Agence immobilière commerciale basée à Brazzaville, au service des entreprises et investisseurs d'Afrique centrale.</p>
+        <div class="socials">
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 9H15V6.5h-1.7C11.4 6.5 10 7.9 10 9.9V11H8.5v2.5H10V21h2.5v-7.5H14l.5-2.5h-2V9.9c0-.5.3-.9.9-.9Z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 8.5H4.06V20h2.88V8.5ZM5.5 4a1.67 1.67 0 1 0 0 3.34A1.67 1.67 0 0 0 5.5 4ZM20 13.6c0-3-1.6-4.4-3.74-4.4a3.23 3.23 0 0 0-2.93 1.6V8.5H10.5c.04.9 0 11.5 0 11.5h2.83v-6.4c0-.34.02-.68.12-.93.27-.68.9-1.38 1.94-1.38 1.37 0 1.92 1.05 1.92 2.58V20H20v-6.4Z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 8.2a3.8 3.8 0 1 0 0 7.6 3.8 3.8 0 0 0 0-7.6Zm0 6.26a2.46 2.46 0 1 1 0-4.92 2.46 2.46 0 0 1 0 4.92ZM16.9 6.9a.9.9 0 1 1-1.8 0 .9.9 0 0 1 1.8 0ZM20 7.2c-.06-1.25-.34-2.36-1.24-3.26-.9-.9-2.01-1.18-3.26-1.24C14.24 2.64 9.76 2.64 8.5 2.7 7.25 2.76 6.14 3.04 5.24 3.94 4.34 4.84 4.06 5.95 4 7.2c-.06 1.26-.06 5.74 0 7 .06 1.25.34 2.36 1.24 3.26.9.9 2 1.18 3.26 1.24 1.26.06 5.74.06 7 0 1.25-.06 2.36-.34 3.26-1.24.9-.9 1.18-2.01 1.24-3.26.06-1.26.06-5.74 0-7Z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Navigation</h5>
+        <ul>
+          <li><a href="#accueil">Accueil</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#biens">Biens</a></li>
+          <li><a href="#apropos">À propos</a></li>
+          <li><a href="#avis">Avis</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#services">Vente &amp; location</a></li>
+          <li><a href="#services">Financement commercial</a></li>
+          <li><a href="#services">Gestion de projets</a></li>
+          <li><a href="#services">Expertises &amp; évaluations</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li>99 Rue Mayama, Brazzaville</li>
+          <li><a href="tel:+242068369325">+242 06 836 9325</a></li>
+          <li><a href="https://wa.me/24268369325" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="https://immo-coms.com" target="_blank" rel="noopener">immo-coms.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 IMMO-COMS. Tous droits réservés.</span>
+      <span>Mentions légales · Plan du site</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Header scroll state
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Mobile nav
+  const burger = document.getElementById('burger-btn');
+  const nav = document.getElementById('main-nav');
+  burger.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open);
+  });
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    nav.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+  }));
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in'));
+  }
+
+  // Portfolio filters
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.p-card');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      cards.forEach(c => {
+        c.style.display = (f === 'all' || c.dataset.cat === f) ? '' : 'none';
+      });
+    });
+  });
+
+  // Contact form validation
+  const form = document.getElementById('rdv-form');
+  const successMsg = document.getElementById('form-success');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let valid = true;
+    const nom = document.getElementById('f-nom');
+    const tel = document.getElementById('f-tel');
+    const email = document.getElementById('f-email');
+    const msg = document.getElementById('f-message');
+
+    document.getElementById('err-nom').textContent = '';
+    document.getElementById('err-tel').textContent = '';
+    document.getElementById('err-email').textContent = '';
+    document.getElementById('err-message').textContent = '';
+
+    if (!nom.value.trim()) { document.getElementById('err-nom').textContent = 'Veuillez indiquer votre nom.'; valid = false; }
+    if (!tel.value.trim()) { document.getElementById('err-tel').textContent = 'Veuillez indiquer votre téléphone.'; valid = false; }
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email.value.trim())) { document.getElementById('err-email').textContent = 'Adresse e-mail invalide.'; valid = false; }
+    if (!msg.value.trim()) { document.getElementById('err-message').textContent = 'Veuillez décrire votre demande.'; valid = false; }
+
+    if (valid) {
+      successMsg.style.display = 'block';
+      form.reset();
+      successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  });
+</script>
+
+</body>
+</html>
